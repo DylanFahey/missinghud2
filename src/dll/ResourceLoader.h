@@ -17,7 +17,8 @@
 
 #include <map>
 
-#include <windows.h>
+//TODO: track down all of windows.h calls and replace them with POSIX variants, or something similar
+#include <windows.h>  
 
 typedef int RESID;
 

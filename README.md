@@ -1,4 +1,34 @@
 ## Overview
+This repository is my experiment at getting MissingHud2 to work on the Linux version of Rebirth. I haven't used C++ in 5 or 6 years, so this is probably going to be a disaster. 
+
+Since MissingHud2 uses a dll injector to work, a similar approach should be possible on Linux. I almost assume it would be easier in Linux than in Windows, using LD_PRELOAD. However, I believe libraries are included in the binaries of Steam games, so I'm not entirely sure if LD_PRELOAD works under those conditions. 
+
+Furthermore, I do not own Afterbirth. I'm relatively terrible at BOI and bullet hell/roguelikes in general, so I can get a lot more mileage out of a game before I run out of content than someone who chews through content. Plus I bought the original BOI with Wrath of Lamb included, and I would have appreciated playing the easier game for a while first. I don't really want to make the same mistake. 
+
+As such, I think my path will probably be as follows: 
+
+1.) Read source code and identify any areas where windows-specific code is being run. Determine what the Isaac-specific dependencies are, and determine if these are any different in Linux and Windows. 
+
+2.) Try to compile dll as a shared object.
+
+3.) Try to eliminate as many errors as possible. Replace calls to windows-specific libraries with POSIX or other cross-platform libraries. Simplify the code if neccessary by removing Afterbirth support. 
+
+4.) Once the dll has been compile without errors, try and inject the shared object using LD_Preload. 
+
+5.) Evaluate progress. If the injection works, share with BOI modding community. If I get stuck I should probably ask for help either way. Ideally I'd get it working to a degree where other people could pitch in a bit.  
+
+There are a few area's where I could probably use help:
+
+1.) Determining what the differences are between the Linux and the Windows versions. 
+
+2.) Testing the code on different platforms. I use FC23. I imagine most of the users will be using OSX, Ubuntu, or a Steam Machine of some kind. 
+
+3.) Figuring out memory locations. I have no experience modding on Linux. I have used a memory tool to cheat on (local) games before, but I don't understand enough about the structure of Linux to understand what I'm doing with memory. 
+
+4.) Checking my code. I haven't programmed in C++ in forever, and even then I don't think I ever learned memory management. 
+
+
+##networkMe's notes:
 Missing HUD 2 is an OpenGL powered informational overlay for the Binding of Isaac: Rebirth + Afterbirth.
 
 The developers of the Binding of Isaac (Edmund McMillen, Nicalis) decided that one of their design decisions for the game would be to hide raw player statistics from the player as to not to overwhelm them. This project gives the player the choice to see their raw statistics if they choose to.
@@ -8,8 +38,6 @@ It is a transparent mod that **DOES NOT** disable achievements nor alter your Is
 It can be enabled and disabled at any point, during any run, with no lasting consequences. One can run other mods side-by-side with Missing HUD 2 with no issues.
 
 Unlike other statistic based mods, it uses your live character statistics during a run. This translates to Missing HUD 2 remaining 100% accurate even after picking up items like [Experimental Treatment](http://bindingofisaacrebirth.gamepedia.com/Experimental_Treatment) and [Libra](http://bindingofisaacrebirth.gamepedia.com/Libra).
-
-![Image of MissingHUD2](https://raw.githubusercontent.com/networkMe/missinghud2/master/doc/isaac-mhud2-example-141.jpg)
 
 ## Using
 Missing HUD 2 aims to be nearly transparent to the user (and to Isaac itself).
